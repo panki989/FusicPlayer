@@ -1,0 +1,42 @@
+[
+  {
+    "name" : "Radio - Bahajan",
+    "stream" : "http://192.99.35.215:5086/stream"
+  },
+  {
+    "name": "Radio - RedFM",
+    "stream": "http://14013.live.streamtheworld.com/CKYRFM_SC"
+  },
+  {
+    "name": "Radio - Punjabi",
+    "stream": "http://www.punjabijunction.com/music/Glassy_LabhJanjua.mp3"
+  },
+  {
+    "name": "Radio - Virsa",
+    "stream": "http://s10.voscast.com:7666/;"
+  },
+  {
+    "name": "Radio - GuruGram ki Aawaz",
+    "stream": "http://50.7.99.163:7045/GurgaonKiAawaz"
+  },
+  {
+    "name": "Radio - Afsana",
+    "stream": "http://174.36.206.197:7019/stream"
+  },
+  {
+    "name": "BBC Radio Asian Network",
+    "stream": "http://bbcmedia.ic.llnwd.net/stream/bbcmedia_asianet_mf_p"
+  },
+  {
+    "name": "Play Check",
+    "stream": "/storage/emulated/0/MIUI/ringtone/ShivTandavRingtone.mp3"
+  },
+  {
+    "name": "Luca Chupi",
+    "stream": "/storage/emulated/0/Music/Duniyaa - Luka Chuppi.mp3"
+  },
+  {
+    "name" : "Radio - City",
+    "stream" : "http://prclive1.listenon.in:9960/;"
+  }
+]
