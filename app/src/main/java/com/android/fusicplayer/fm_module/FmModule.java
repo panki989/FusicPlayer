@@ -2,23 +2,19 @@ package com.android.fusicplayer.fm_module;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.TextView;
 
-
+import com.android.fusicplayer.MainActivity;
 import com.android.fusicplayer.R;
-import com.android.fusicplayer.player.PlaybackStatus;
-import com.android.fusicplayer.player.RadioManager;
 import com.android.fusicplayer.fm_module.util.Shoutcast;
 import com.android.fusicplayer.fm_module.util.ShoutcastListAdapter;
-
+import com.android.fusicplayer.player.PlaybackStatus;
+import com.android.fusicplayer.player.RadioManager;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -32,40 +28,25 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.OnItemClick;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FmModule extends Fragment implements AdapterView.OnItemClickListener, View.OnClickListener {
+public class FmModule extends Fragment implements AdapterView.OnItemClickListener {
 
     private ArrayList<Shoutcast> mList;
     private ShoutcastListAdapter mAdapter;
 
-    @BindView(R.id.playTrigger)
-    ImageButton trigger;
 
     @BindView(R.id.listFmDisplay)
     ListView listView;
 
-    @BindView(R.id.name)
-    TextView textView;
-
-    @BindView(R.id.sub_player)
-    View subPlayer;
-
     RadioManager radioManager;
-
-    String streamURL;
 
     public static FmModule newInstance() {
         return new FmModule();
-    }
-
-    public FmModule() {
-
     }
 
     private void retrieveShoutcasts() {
@@ -76,6 +57,16 @@ public class FmModule extends Fragment implements AdapterView.OnItemClickListene
         } catch (Exception mException) {
             Log.d("FmModule", "Error reading JSON data, Error:: " + mException.getMessage());
         }
+    }
+
+    public String[] getFirstChannel() {
+        String[] str = new String[2];
+        if (mList != null) {
+            str[0] = mList.get(0).getName();
+            str[1] = mList.get(0).getUrl();
+            return str;
+        } else
+            return null;
     }
 
     @Override
@@ -99,26 +90,8 @@ public class FmModule extends Fragment implements AdapterView.OnItemClickListene
     @OnItemClick(R.id.listFmDisplay)
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Shoutcast shoutcast = (Shoutcast) parent.getItemAtPosition(position);
-        if (shoutcast == null)
-            return;
-        textView.setText(shoutcast.getName());
-        subPlayer.setVisibility(View.VISIBLE);
-        streamURL = shoutcast.getUrl();
-        radioManager.playOrPause(streamURL);
-    }
-
-    @OnClick(R.id.playTrigger)
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.playTrigger:
-                if(TextUtils.isEmpty(streamURL))
-                    return;
-                radioManager.playOrPause(streamURL);
-                break;
-
-                default:
-                    break;
-        }
+        if (shoutcast == null) return;
+        ((MainActivity) getActivity()).manageBottomView(shoutcast.getName(), shoutcast.getUrl());
     }
 
     @Override
@@ -143,29 +116,19 @@ public class FmModule extends Fragment implements AdapterView.OnItemClickListene
 
     @Override
     public void onResume() {
-        radioManager.bind();
         super.onResume();
-
+        radioManager.bind();
     }
 
 
     @Subscribe
-    public void onEvent(String status){
-
-        switch (status){
-
+    public void onEvent(String status) {
+        switch (status) {
             case PlaybackStatus.LOADING:
-                //loading
                 break;
 
             case PlaybackStatus.ERROR:
                 break;
-
         }
-
-        trigger.setImageResource(status.equals(PlaybackStatus.PLAYING)
-                ? R.drawable.ic_pause_black
-                : R.drawable.ic_play_arrow_black);
-
     }
 }

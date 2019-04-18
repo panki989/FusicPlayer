@@ -7,8 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.android.fusicplayer.MainActivity;
 import com.android.fusicplayer.R;
 
 import java.util.ArrayList;
@@ -58,7 +58,10 @@ public class SongAdapter extends RecyclerView.Adapter {
             tvSongName.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(activity, songinfo.get(getAdapterPosition()).getSongName(), Toast.LENGTH_SHORT).show();
+                    ((MainActivity)activity).manageBottomView(
+                            songinfo.get(getAdapterPosition()).getSongName(),
+                            songinfo.get(getAdapterPosition()).getSongURL());
+
                 }
             });
         }

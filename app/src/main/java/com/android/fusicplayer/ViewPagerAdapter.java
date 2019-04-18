@@ -10,20 +10,23 @@ import com.android.fusicplayer.music_module.MusicModule;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
 
-    public ViewPagerAdapter(FragmentManager fm) {
+    ViewPagerAdapter(FragmentManager fm) {
         super(fm);
     }
+
+    private  MusicModule musicModule;
+    private  FmModule fmModule;
 
     @Override
     public Fragment getItem(int position) {
 
         switch(position) {
             case 0:
-                MusicModule musicModule = new MusicModule();
+                musicModule = MusicModule.newInstance();
                 return musicModule;
 
             case 1:
-                FmModule fmModule = FmModule.newInstance();
+                fmModule = FmModule.newInstance();
                 return fmModule;
 
             default:
@@ -47,4 +50,15 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         else
             return null;
     }
+
+    String[] getFirstChannel(){
+
+        return fmModule.getFirstChannel();
+    }
+
+    String[] getFirstSong(){
+
+        return musicModule.getFirstSong();
+    }
+
 }

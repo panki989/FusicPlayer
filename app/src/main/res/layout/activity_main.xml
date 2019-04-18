@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,10 +9,11 @@
     android:orientation="vertical">
 
     <include
+        android:id="@+id/toolBar"
         layout="@layout/toolbar_layout"/>
 
     <android.support.design.widget.TabLayout
-
+        android:layout_below="@id/toolBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tabs"
@@ -22,13 +23,45 @@
         app:tabMode="fixed"
         app:tabGravity="fill"
         app:tabTextColor="#FFF"
-        app:tabSelectedTextColor="@color/colorAccent"
-        />
+        app:tabSelectedTextColor="@color/colorAccent" />
 
     <android.support.v4.view.ViewPager
+        android:layout_above="@id/bottomView"
+        android:layout_below="@id/tabs"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/pager"
-        />
+        android:id="@+id/pager" />
 
-</LinearLayout>
+    <RelativeLayout
+        android:background="#999"
+        android:id="@+id/bottomView"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="64dp">
+
+        <TextView
+            android:id="@+id/songName"
+            android:layout_centerVertical="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|start"
+            android:text="Radio station"
+            android:paddingStart="16dp"
+            android:paddingLeft="16dp"
+            android:textStyle="bold"
+            android:textSize="20sp" />
+
+        <ImageButton
+            android:id="@+id/playTrigger"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="8dp"
+            android:background="@null"/>
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>
