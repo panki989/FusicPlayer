@@ -11,7 +11,7 @@ import org.greenrobot.eventbus.EventBus;
 
 public class RadioManager {
 
-    private static RadioManager instance = null;
+   private static  RadioManager instance = null;
 
     private static RadioService service;
 
@@ -24,15 +24,14 @@ public class RadioManager {
         serviceBound = false;
     }
 
-    public static RadioManager with(Context context) {
+    public  static RadioManager with(Context context) {
 
         if (instance == null)
             instance = new RadioManager(context);
-
         return instance;
     }
 
-    public static RadioService getService() {
+    private static RadioService getService() {
 
         return service;
     }

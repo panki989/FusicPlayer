@@ -4,7 +4,6 @@ import android.app.Instrumentation;
 import android.support.design.widget.TabLayout;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
-import android.support.v7.widget.RecyclerView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -65,8 +64,8 @@ public class MusicModuleTest {
 
     @Test
     public void testMPListPresence(){
-        RecyclerView recyclerView = mainActivity.findViewById(R.id.listMusicDisplay);
-        assertNotNull(recyclerView);
+        TextView textViewView = mainActivity.findViewById(R.id.musicName);
+        assertNotNull(textViewView);
     }
 
     @After
